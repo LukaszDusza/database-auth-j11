@@ -37,6 +37,17 @@ public class UserApp {
 
     public UserApp() { }
 
+    public UserApp(String name, String lastName, String email, String login, String password,
+                   int active, Set<Role> roles) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+    }
+
     public Long getId() {
         return id;
     }

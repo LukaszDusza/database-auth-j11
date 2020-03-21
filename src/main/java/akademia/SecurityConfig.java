@@ -44,17 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .usernameParameter("username")
             .passwordParameter("password")
             .successHandler((req, res, auth) -> {
-                for(GrantedAuthority g: auth.getAuthorities()) {
-                    System.out.println(g.getAuthority());
-                }
-            //    res.addCookie(new Cookie("ale-ciacho", "ciacho z akademii kodu"));
-                res.sendRedirect("/");
+                res.sendRedirect("/home");
             })
             .failureUrl("/login?error='incorrect login or password'")
             .failureHandler((req, res, auth) -> {
-                System.out.println(req.getQueryString());
-                System.out.println(req.getRequestURI());
-                System.out.println(req.getUserPrincipal());
+               if(res.getStatus() == 403) {
+                   res.sendRedirect("/login?error='nie masz uprawnień'");
+               }
+                if(res.getStatus() == 404) {
+                    res.sendRedirect("/home");
+                }
             })
             .permitAll() //todo sprawdzic permit
             .and()
@@ -66,9 +65,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             })
             .permitAll(); //todo sprawdzic permit
 
-//        http.headers().frameOptions().disable();
-//        http.cors().disable();
-//        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.cors().disable();
+        http.csrf().disable();
 
 
     }

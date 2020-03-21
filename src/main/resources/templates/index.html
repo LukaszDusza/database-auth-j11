@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 This is home page! <br>
-<a href="/user">user page</a> | <a href="/admin">admin page</a>
+<p th:text="${login}"></p>
+<p th:if="${name}" th:text="${name} + ' zostałeś poprawnie zarejestrowany.'"></p>
+<a href="/user">user page</a> | <a href="/admin">admin page</a> | <a href="/register">sign up</a>
 </body>
 </html>
